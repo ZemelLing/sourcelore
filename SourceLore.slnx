@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SourceLore.Core/SourceLore.Core.csproj" />
+    <Project Path="src/SourceLore.Infrastructure.Lore/SourceLore.Infrastructure.Lore.csproj" />
+    <Project Path="src/SourceLore.App/SourceLore.App.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SourceLore.Core.Tests/SourceLore.Core.Tests.csproj" />
+    <Project Path="tests/SourceLore.Lore.IntegrationTests/SourceLore.Lore.IntegrationTests.csproj" />
+    <Project Path="tests/SourceLore.App.SmokeTests/SourceLore.App.SmokeTests.csproj" />
+  </Folder>
+</Solution>

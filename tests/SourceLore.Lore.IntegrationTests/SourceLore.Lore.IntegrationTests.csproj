@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><ProjectReference Include="../../src/SourceLore.Infrastructure.Lore/SourceLore.Infrastructure.Lore.csproj" /></ItemGroup>
+</Project>

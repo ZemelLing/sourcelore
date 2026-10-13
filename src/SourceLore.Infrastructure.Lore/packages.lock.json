@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "dependencies": {
+    "net10.0": {
+      "LoreVcs": {
+        "type": "Direct",
+        "requested": "[0.10.0, )",
+        "resolved": "0.10.0",
+        "contentHash": "8vTDMGR2sPX7ivI6Q01G5S/JxJ3DiCU1UtLeGVZ/dfzth/GaS6/lt2am60oL4Dq6XEy/N9MhCrvK5oT7n2w5cQ=="
+      },
+      "LoreVcs.runtime.win-x64": {
+        "type": "Direct",
+        "requested": "[0.10.0, )",
+        "resolved": "0.10.0",
+        "contentHash": "zbuO5qf0Xrs6KxdWZX2WSpZ8NN4Pqr3XqYP6qggjUWwaLv9988+zHkXlqahn9ojmsSOSdiFTZDE/lric4UrqiA=="
+      },
+      "Microsoft.NET.ILLink.Tasks": {
+        "type": "Direct",
+        "requested": "[10.0.12, )",
+        "resolved": "10.0.12",
+        "contentHash": "xi+BDjFpW+Sb+MHFHaH6Y/gV9I8BluFwRXc1QyCdoZbIK26eNiBeFuMTe/FMwc33G1wdHCyDg7CVTmb8OdQrMQ=="
+      },
+      "sourcelore.core": {
+        "type": "Project"
+      }
+    },
+    "net10.0/win-x64": {
+      "LoreVcs": {
+        "type": "Direct",
+        "requested": "[0.10.0, )",
+        "resolved": "0.10.0",
+        "contentHash": "8vTDMGR2sPX7ivI6Q01G5S/JxJ3DiCU1UtLeGVZ/dfzth/GaS6/lt2am60oL4Dq6XEy/N9MhCrvK5oT7n2w5cQ==",
+        "dependencies": {
+          "LoreVcs.runtime.win-x64": "0.10.0"
+        }
+      },
+      "LoreVcs.runtime.win-x64": {
+        "type": "Direct",
+        "requested": "[0.10.0, )",
+        "resolved": "0.10.0",
+        "contentHash": "zbuO5qf0Xrs6KxdWZX2WSpZ8NN4Pqr3XqYP6qggjUWwaLv9988+zHkXlqahn9ojmsSOSdiFTZDE/lric4UrqiA=="
+      }
+    }
+  }
+}

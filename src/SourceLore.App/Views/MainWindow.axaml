@@ -1,0 +1,191 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:SourceLore.App.ViewModels"
+        xmlns:models="clr-namespace:SourceLore.Core.Workspaces;assembly=SourceLore.Core"
+        xmlns:views="using:SourceLore.App.Views"
+        x:Class="SourceLore.App.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="{Binding Title}" Width="1180" Height="760" MinWidth="900" MinHeight="560">
+  <Grid Margin="18" RowDefinitions="Auto,Auto,Auto,*,Auto">
+    <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
+      <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" />
+      <views:ClipboardTextBox x:Name="RootPathInput" Grid.Column="1" Text="{Binding Path}" PlaceholderText="Lore 工作目录路径" IsEnabled="{Binding NotBusy}" />
+      <Button Grid.Column="2" Content="打开目录" Command="{Binding Open}" />
+      <Button Grid.Column="3" Content="重新扫描" Command="{Binding Refresh}" />
+    </Grid>
+    <Grid Grid.Row="1" Margin="0,12" ColumnDefinitions="*,300,Auto,Auto" ColumnSpacing="8">
+      <TextBlock Text="{Binding Identity}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+      <ComboBox Grid.Column="1" ItemsSource="{Binding Recent}" SelectedItem="{Binding SelectedRecent}" PlaceholderText="最近工作目录" HorizontalAlignment="Stretch">
+        <ComboBox.ItemTemplate>
+          <DataTemplate x:DataType="models:RecentWorkspace">
+            <StackPanel><TextBlock Text="{Binding Name}" /><TextBlock Text="{Binding RootPath}" FontSize="10" /></StackPanel>
+          </DataTemplate>
+        </ComboBox.ItemTemplate>
+      </ComboBox>
+      <Button Grid.Column="2" Content="打开所选" Command="{Binding OpenRecent}" />
+      <Button Grid.Column="3" Content="移除记录" Command="{Binding RemoveRecent}" />
+    </Grid>
+    <Expander Grid.Row="2" Header="克隆远端仓库" Margin="0,0,0,8" HorizontalAlignment="Stretch">
+      <Grid ColumnDefinitions="*,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="8">
+        <views:ClipboardTextBox Text="{Binding RemoteUrl}" PlaceholderText="Lore 远端仓库地址" IsEnabled="{Binding NotBusy}" />
+        <views:ClipboardTextBox Grid.Column="1" Text="{Binding CloneDestination}" PlaceholderText="新的克隆目标目录（必须为空）" IsEnabled="{Binding NotBusy}" />
+        <Button Grid.Column="2" Content="克隆并打开" Command="{Binding Clone}" />
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="8">
+          <Button Content="登录此远端" Command="{Binding Login}" />
+          <Button Content="打开登录浏览器" Command="{Binding OpenLoginBrowser}" />
+          <Button Content="取消等待登录" Command="{Binding CancelLogin}" />
+        </StackPanel>
+        <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Text="{Binding AuthenticationStatus}" TextWrapping="Wrap" />
+      </Grid>
+    </Expander>
+    <TabControl Grid.Row="3" SelectedIndex="{Binding SelectedPage}">
+      <TabItem Header="工作区">
+    <Grid ColumnDefinitions="360,6,*">
+      <Grid RowDefinitions="Auto,*,Auto,Auto,Auto,Auto" RowSpacing="8">
+        <WrapPanel>
+          <Button Content="暂存所选文件" Command="{Binding Stage}" />
+          <Button Content="取消暂存" Command="{Binding Unstage}" />
+          <Button Content="暂存勾选文件" Command="{Binding StageChecked}" />
+          <Button Content="取消勾选文件暂存" Command="{Binding UnstageChecked}" />
+        </WrapPanel>
+      <ListBox Grid.Row="1" ItemsSource="{Binding Choices}" SelectedItem="{Binding SelectedChoice}" IsEnabled="{Binding NotBusy}">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="vm:FileChoice">
+            <Grid ColumnDefinitions="Auto,Auto,*" RowDefinitions="Auto,Auto" Margin="2" ColumnSpacing="8">
+              <CheckBox IsChecked="{Binding IsChecked}" IsEnabled="{Binding IsFile}" ToolTip.Tip="选择用于批量操作；勾选本身不改变暂存状态。" />
+              <TextBlock Grid.Column="1" Text="{Binding File.Action}" FontSize="11" />
+              <TextBlock Grid.Column="2" Text="{Binding File.Path}" TextTrimming="CharacterEllipsis" />
+              <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="已暂存" IsVisible="{Binding File.Staged}" FontSize="11" Foreground="#77C8A5" />
+                <TextBlock Text="磁盘变更" IsVisible="{Binding File.Dirty}" FontSize="11" Foreground="#D3B679" />
+                <TextBlock Text="冲突" IsVisible="{Binding File.Conflict}" FontSize="11" Foreground="#EF8989" />
+              </StackPanel>
+            </Grid>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+        <TextBlock Grid.Row="2" Text="暂存为路径选择；提交读取该文件的最新内容。" TextWrapping="Wrap" FontSize="12" />
+        <views:ClipboardTextBox Grid.Row="3" Text="{Binding Message}" PlaceholderText="提交说明" AcceptsReturn="True" MinHeight="100" IsEnabled="{Binding NotBusy}" />
+        <Button Grid.Row="4" Content="本地提交已暂存文件" Command="{Binding Commit}" HorizontalAlignment="Stretch" />
+      </Grid>
+      <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+      <Grid Grid.Column="2" RowDefinitions="Auto,Auto,*" RowSpacing="6">
+        <WrapPanel>
+          <CheckBox Content="并排差异" IsChecked="{Binding SideBySide}" />
+          <Button Content="从远端读取版本内容" Command="{Binding FetchWorkingContent}" />
+          <Button Content="使用外部编辑器打开工作文件" Command="{Binding OpenWorkingFile}" />
+        </WrapPanel>
+        <StackPanel Grid.Row="1"><TextBlock Text="{Binding ComparisonLabel}" TextWrapping="Wrap" /><TextBlock Text="{Binding FormatLabel}" FontSize="11" TextWrapping="Wrap" /></StackPanel>
+        <views:DiffTextEditor Grid.Row="2" x:Name="DiffEditor" SourceText="{Binding Patch}" IsVisible="{Binding UnifiedVisible}" IsReadOnly="True" ShowLineNumbers="True"
+                         FontFamily="Cascadia Mono,Consolas" FontSize="13" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" />
+        <Grid Grid.Row="2" ColumnDefinitions="*,6,*" IsVisible="{Binding SideBySide}">
+          <views:DiffTextEditor x:Name="LeftDiffEditor" SourceText="{Binding LeftPatch}" IsReadOnly="True" ShowLineNumbers="False" FontFamily="Cascadia Mono,Consolas" FontSize="13" />
+          <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+          <views:DiffTextEditor Grid.Column="2" x:Name="RightDiffEditor" SourceText="{Binding RightPatch}" IsReadOnly="True" ShowLineNumbers="False" FontFamily="Cascadia Mono,Consolas" FontSize="13" />
+        </Grid>
+      </Grid>
+    </Grid>
+      </TabItem>
+      <TabItem Header="历史">
+        <Grid RowDefinitions="Auto,Auto,*" RowSpacing="10" Margin="0,8">
+          <StackPanel Orientation="Horizontal" Spacing="8">
+            <ComboBox Width="220" ItemsSource="{Binding Branches}" SelectedItem="{Binding SelectedBranch}" PlaceholderText="历史起点分支">
+              <ComboBox.ItemTemplate><DataTemplate x:DataType="models:BranchEntry"><TextBlock Text="{Binding Label}" /></DataTemplate></ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="加载 / 刷新历史" Command="{Binding RefreshHistory}" />
+            <Button Content="加载较早版本" Command="{Binding MoreHistory}" />
+          </StackPanel>
+          <StackPanel Grid.Row="1"><TextBlock Text="{Binding HistoryStatus}" TextWrapping="Wrap" /><TextBlock Text="{Binding RemoteStateLabel}" TextWrapping="Wrap" FontSize="11" /></StackPanel>
+          <Grid Grid.Row="2" ColumnDefinitions="300,6,*">
+          <ListBox ItemsSource="{Binding History}" SelectedItem="{Binding SelectedHistory}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="models:RevisionEntry">
+                <StackPanel Spacing="4" Margin="4">
+                  <TextBlock Text="{Binding Summary}" FontWeight="SemiBold" />
+                  <TextBlock Text="{Binding Revision}" FontFamily="Consolas" FontSize="11" />
+                  <StackPanel Orientation="Horizontal" Spacing="12"><TextBlock Text="{Binding TimeLabel}" /><TextBlock Text="{Binding Author}" /></StackPanel>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+          <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+          <Grid Grid.Column="2" RowDefinitions="Auto,Auto,100,Auto,Auto,*" RowSpacing="6">
+            <ScrollViewer MaxHeight="130"><TextBlock Text="{Binding HistoryDetails}" TextWrapping="Wrap" /></ScrollViewer>
+            <ComboBox Grid.Row="1" ItemsSource="{Binding HistoryBases}" SelectedItem="{Binding SelectedHistoryBase}" HorizontalAlignment="Stretch">
+              <ComboBox.ItemTemplate><DataTemplate x:DataType="models:RevisionChoice"><TextBlock Text="{Binding Label}" TextTrimming="CharacterEllipsis" /></DataTemplate></ComboBox.ItemTemplate>
+            </ComboBox>
+            <ListBox Grid.Row="2" ItemsSource="{Binding HistoryFiles}" SelectedItem="{Binding SelectedHistoryFile}">
+              <ListBox.ItemTemplate><DataTemplate x:DataType="models:RevisionFileChange"><TextBlock Text="{Binding Label}" /></DataTemplate></ListBox.ItemTemplate>
+            </ListBox>
+            <Grid Grid.Row="3" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="6">
+              <views:ClipboardTextBox Text="{Binding HistoryPath}" PlaceholderText="两个版本中的相同相对路径" />
+              <Button Grid.Column="1" Content="比较路径" Command="{Binding CompareHistoryPath}" />
+              <CheckBox Grid.Column="2" Content="并排" IsChecked="{Binding SideBySide}" />
+            </Grid>
+            <StackPanel Grid.Row="4">
+              <WrapPanel><Button Content="从远端读取所选历史内容" Command="{Binding FetchHistoryContent}" /><Button Content="外部打开左侧只读版本" Command="{Binding OpenHistoryLeft}" /><Button Content="外部打开右侧只读版本" Command="{Binding OpenHistoryRight}" /></WrapPanel>
+              <TextBlock Text="{Binding HistoryComparisonLabel}" TextWrapping="Wrap" /><TextBlock Text="{Binding HistoryFormat}" FontSize="11" TextWrapping="Wrap" />
+            </StackPanel>
+            <views:DiffTextEditor Grid.Row="5" x:Name="HistoryDiffEditor" SourceText="{Binding HistoryPatch}" IsVisible="{Binding UnifiedVisible}" IsReadOnly="True" ShowLineNumbers="True" FontFamily="Cascadia Mono,Consolas" FontSize="13" />
+            <Grid Grid.Row="5" ColumnDefinitions="*,6,*" IsVisible="{Binding SideBySide}">
+              <views:DiffTextEditor SourceText="{Binding HistoryLeft}" IsReadOnly="True" FontFamily="Cascadia Mono,Consolas" FontSize="13" />
+              <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+              <views:DiffTextEditor Grid.Column="2" SourceText="{Binding HistoryRight}" IsReadOnly="True" FontFamily="Cascadia Mono,Consolas" FontSize="13" />
+            </Grid>
+          </Grid>
+          </Grid>
+        </Grid>
+      </TabItem>
+      <TabItem Header="分支">
+        <StackPanel Spacing="12" Margin="8">
+          <TextBlock Text="{Binding BranchStatus}" TextWrapping="Wrap" />
+          <Button Content="读取本地分支" Command="{Binding RefreshBranches}" />
+          <ComboBox ItemsSource="{Binding Branches}" SelectedItem="{Binding SelectedBranch}" HorizontalAlignment="Stretch">
+            <ComboBox.ItemTemplate><DataTemplate x:DataType="models:BranchEntry"><TextBlock Text="{Binding Label}" /></DataTemplate></ComboBox.ItemTemplate>
+          </ComboBox>
+          <Button Content="切换到所选已有分支" Command="{Binding SwitchBranch}" />
+          <TextBlock Text="{Binding BranchCreateHint}" TextWrapping="Wrap" />
+          <views:ClipboardTextBox Text="{Binding NewBranchName}" PlaceholderText="新分支名称" IsEnabled="{Binding NotBusy}" />
+          <Button Content="从当前版本创建并切换" Command="{Binding CreateBranch}" />
+          <TextBlock Text="有本地修改、暂存选择或未完成合并时拒绝操作。请先处理当前工作。" TextWrapping="Wrap" />
+        </StackPanel>
+      </TabItem>
+      <TabItem Header="同步与冲突">
+        <ScrollViewer><Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="8" Margin="8">
+          <TextBlock Text="{Binding SyncTargetLabel}" TextWrapping="Wrap" />
+          <TextBlock Grid.Row="1" Text="{Binding RemoteStateLabel}" TextWrapping="Wrap" />
+          <WrapPanel Grid.Row="2">
+            <Button Content="核实远端状态" Command="{Binding VerifyRemote}" />
+            <Button Content="准备推送本地提交" Command="{Binding PreparePush}" />
+            <Button Content="准备同步远端更新" Command="{Binding PrepareSync}" />
+            <Button Content="查看中止合并影响" Command="{Binding PrepareAbort}" />
+          </WrapPanel>
+          <Border Grid.Row="3" IsVisible="{Binding HasRemotePlan}" BorderBrush="#52627A" BorderThickness="1" Padding="10">
+            <StackPanel Spacing="8">
+              <TextBlock Text="{Binding RemotePlanLabel}" TextWrapping="Wrap" />
+              <StackPanel Orientation="Horizontal" Spacing="8"><Button Content="确认执行上述操作" Command="{Binding ConfirmRemoteOperation}" /><Button Content="取消准备" Command="{Binding CancelRemotePlan}" /></StackPanel>
+            </StackPanel>
+          </Border>
+          <TextBlock Grid.Row="4" Text="{Binding MergeStateLabel}" TextWrapping="Wrap" />
+          <ListBox Grid.Row="5" Height="150" ItemsSource="{Binding Conflicts}" SelectedItem="{Binding SelectedConflict}">
+            <ListBox.ItemTemplate><DataTemplate x:DataType="models:FileChange"><StackPanel Orientation="Horizontal" Spacing="12"><TextBlock Text="{Binding Path}" /><TextBlock Text="{Binding ConflictLabel}" /></StackPanel></DataTemplate></ListBox.ItemTemplate>
+          </ListBox>
+          <StackPanel Grid.Row="6" Spacing="6">
+            <StackPanel Orientation="Horizontal" Spacing="8"><Button Content="外部编辑所选冲突" Command="{Binding OpenConflictFile}" /><Button Content="显式标记所选当前内容已解决" Command="{Binding MarkConflictResolved}" /></StackPanel>
+            <views:ClipboardTextBox Text="{Binding Message}" PlaceholderText="合并提交说明；继续会本地提交所有已暂存内容" IsEnabled="{Binding NotBusy}" />
+            <Button Content="继续合并并本地提交已暂存内容" Command="{Binding ContinueMerge}" />
+          </StackPanel>
+          <TextBlock Grid.Row="7" Text="{Binding BackupPath}" TextWrapping="Wrap" />
+        </Grid></ScrollViewer>
+      </TabItem>
+    </TabControl>
+    <StackPanel Grid.Row="4" Margin="0,12,0,0" Spacing="8">
+      <ProgressBar IsIndeterminate="True" IsVisible="{Binding Busy}" Height="3" />
+      <TextBlock Text="{Binding WorkspaceStateLabel}" FontSize="11" />
+      <TextBlock Text="{Binding Feedback}" TextWrapping="Wrap" Foreground="#EF8989" />
+      <TextBlock Text="{Binding Recovery}" TextWrapping="Wrap" Foreground="#D3B679" />
+      <Button Content="我已检查实际版本与文件，确认核对" Command="{Binding ConfirmReconciliation}" />
+      <TextBlock Text="{Binding Status}" TextWrapping="Wrap" />
+    </StackPanel>
+  </Grid>
+</Window>

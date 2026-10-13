@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../SourceLore.Core/SourceLore.Core.csproj" />
+    <PackageReference Include="LoreVcs" />
+    <PackageReference Include="LoreVcs.runtime.win-x64" />
+  </ItemGroup>
+</Project>

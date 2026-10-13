@@ -1,0 +1,92 @@
+{
+  "Avalonia.BuildServices": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia.BuildServices/777f975b0a0cecf0311273711d56697212c558c0/LICENSE",
+    "file": "Avalonia.BuildServices.txt",
+    "commit": "777f975b0a0cecf0311273711d56697212c558c0",
+    "sha256": "94162C40C663BD96EC1B870E6ABA6EF0A43F44C9EB500807E7965E7078F6DC47"
+  },
+  "Avalonia.X11": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.Win32": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.AvaloniaEdit": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/AvaloniaEdit/86fdebec4cff7affb0e14c7885df71d28edce777/LICENSE",
+    "file": "AvaloniaEdit.txt",
+    "commit": "86fdebec4cff7affb0e14c7885df71d28edce777",
+    "sha256": "8A13531B616DF7E9CD5D58BD8588DA2288E14FAB9E6785D1AEAD5C87E0A507D0"
+  },
+  "Avalonia": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Tmds.DBus.Protocol": {
+    "url": "https://raw.githubusercontent.com/tmds/Tmds.DBus/b4a7fed0b878f74cb54f7cca84d2889af4e596ba/COPYING",
+    "file": "Tmds.DBus.txt",
+    "commit": "b4a7fed0b878f74cb54f7cca84d2889af4e596ba",
+    "sha256": "ACA3B49277ABCC7886CCB2F115603A9F5B15FC3F96019A10C00F2974098B210C"
+  },
+  "Avalonia.Native": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.Themes.Fluent": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.Skia": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.Remote.Protocol": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.Desktop": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.FreeDesktop": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "MicroCom.Runtime": {
+    "url": "https://raw.githubusercontent.com/kekekeks/MicroCom/76785efcafd91b5902fd19dd11145f6dd655b7b4/LICENSE",
+    "file": "MicroCom.txt",
+    "commit": "76785efcafd91b5902fd19dd11145f6dd655b7b4",
+    "sha256": "6EE769C9AC4DAC9ABB16B98B1341E9528FF9F4AB685481410D3376D14148F3A9"
+  },
+  "Avalonia.HarfBuzz": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  },
+  "Avalonia.FreeDesktop.AtSpi": {
+    "url": "https://raw.githubusercontent.com/AvaloniaUI/Avalonia/2d79ba55fae1b1e71c69f93a668080c9029e6a31/licence.md",
+    "file": "Avalonia.txt",
+    "commit": "2d79ba55fae1b1e71c69f93a668080c9029e6a31",
+    "sha256": "213814D306090074D234D760239FF0F67EB9B8D20EEFB4D5631BB39DBE0B769B"
+  }
+}

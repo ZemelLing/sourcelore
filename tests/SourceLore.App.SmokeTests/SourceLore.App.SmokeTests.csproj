@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Tests launch the published AOT executable; they do not load its managed assembly. -->
+  <ItemGroup>
+    <ProjectReference Include="../../src/SourceLore.Infrastructure.Lore/SourceLore.Infrastructure.Lore.csproj" />
+    <Compile Include="../SourceLore.Lore.IntegrationTests/LoreFixture.cs" Link="LoreFixture.cs" />
+    <Compile Include="../SourceLore.Lore.IntegrationTests/ControlledServer.cs" Link="ControlledServer.cs" />
+    <Compile Include="../../src/SourceLore.App/ViewModels/MainWindowViewModel.cs" Link="ViewModels/MainWindowViewModel.cs" />
+    <Compile Include="../../src/SourceLore.App/ViewModels/HistoryDetailsViewModel.cs" Link="ViewModels/HistoryDetailsViewModel.cs" />
+    <Compile Include="../../src/SourceLore.App/ViewModels/SynchronizationViewModel.cs" Link="ViewModels/SynchronizationViewModel.cs" />
+    <Compile Include="../../src/SourceLore.App/ViewModels/AsyncCommand.cs" Link="ViewModels/AsyncCommand.cs" />
+    <Compile Include="../../src/SourceLore.App/ViewModels/FileChoice.cs" Link="ViewModels/FileChoice.cs" />
+  </ItemGroup>
+</Project>
